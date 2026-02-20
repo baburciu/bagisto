@@ -71,27 +71,27 @@ class Installer extends Command
      * @var array
      */
     protected $locales = [
-        'ar' => 'Arabic',
-        'bn' => 'Bengali',
-        'ca' => 'Catalan',
-        'de' => 'German',
-        'en' => 'English',
-        'es' => 'Spanish',
-        'fa' => 'Persian',
-        'fr' => 'French',
-        'he' => 'Hebrew',
+        'ar'    => 'Arabic',
+        'bn'    => 'Bengali',
+        'ca'    => 'Catalan',
+        'de'    => 'German',
+        'en'    => 'English',
+        'es'    => 'Spanish',
+        'fa'    => 'Persian',
+        'fr'    => 'French',
+        'he'    => 'Hebrew',
         'hi_IN' => 'Hindi',
-        'id' => 'Indonesian',
-        'it' => 'Italian',
-        'ja' => 'Japanese',
-        'nl' => 'Dutch',
-        'pl' => 'Polish',
+        'id'    => 'Indonesian',
+        'it'    => 'Italian',
+        'ja'    => 'Japanese',
+        'nl'    => 'Dutch',
+        'pl'    => 'Polish',
         'pt_BR' => 'Brazilian Portuguese',
-        'ro' => 'Romanian',
-        'ru' => 'Russian',
-        'sin' => 'Sinhala',
-        'tr' => 'Turkish',
-        'uk' => 'Ukrainian',
+        'ro'    => 'Romanian',
+        'ru'    => 'Russian',
+        'sin'   => 'Sinhala',
+        'tr'    => 'Turkish',
+        'uk'    => 'Ukrainian',
         'zh_CN' => 'Chinese',
     ];
 
@@ -386,7 +386,7 @@ class Installer extends Command
             default  : 'admin@example.com',
             validate : fn (string $value) => match (true) {
                 ! filter_var($value, FILTER_VALIDATE_EMAIL) => 'The email address you entered is not valid please try again.',
-                default => null
+                default                                     => null
             }
         );
 
@@ -414,11 +414,11 @@ class Installer extends Command
             DB::table('admins')->updateOrInsert(
                 ['id' => 1],
                 [
-                    'name' => $adminName,
-                    'email' => $adminEmail,
+                    'name'     => $adminName,
+                    'email'    => $adminEmail,
                     'password' => $password,
-                    'role_id' => 1,
-                    'status' => 1,
+                    'role_id'  => 1,
+                    'status'   => 1,
                 ]
             );
 
@@ -575,11 +575,11 @@ class Installer extends Command
          * Setting application configuration.
          */
         config([
-            'app.env' => $this->getEnvVariable('APP_ENV'),
-            'app.name' => $this->getEnvVariable('APP_NAME'),
-            'app.url' => $this->getEnvVariable('APP_URL'),
+            'app.env'      => $this->getEnvVariable('APP_ENV'),
+            'app.name'     => $this->getEnvVariable('APP_NAME'),
+            'app.url'      => $this->getEnvVariable('APP_URL'),
             'app.timezone' => $this->getEnvVariable('APP_TIMEZONE'),
-            'app.locale' => $this->getEnvVariable('APP_LOCALE'),
+            'app.locale'   => $this->getEnvVariable('APP_LOCALE'),
             'app.currency' => $this->getEnvVariable('APP_CURRENCY'),
         ]);
 
@@ -591,12 +591,12 @@ class Installer extends Command
         DB::purge();
 
         config([
-            "database.connections.{$databaseConnection}.host" => $this->getEnvVariable('DB_HOST'),
-            "database.connections.{$databaseConnection}.port" => $this->getEnvVariable('DB_PORT'),
+            "database.connections.{$databaseConnection}.host"     => $this->getEnvVariable('DB_HOST'),
+            "database.connections.{$databaseConnection}.port"     => $this->getEnvVariable('DB_PORT'),
             "database.connections.{$databaseConnection}.database" => $this->getEnvVariable('DB_DATABASE'),
             "database.connections.{$databaseConnection}.username" => $this->getEnvVariable('DB_USERNAME'),
             "database.connections.{$databaseConnection}.password" => $this->getEnvVariable('DB_PASSWORD'),
-            "database.connections.{$databaseConnection}.prefix" => $this->getEnvVariable('DB_PREFIX'),
+            "database.connections.{$databaseConnection}.prefix"   => $this->getEnvVariable('DB_PREFIX'),
         ]);
 
         DB::reconnect();
@@ -664,9 +664,9 @@ class Installer extends Command
     protected function getSeederConfiguration(): array
     {
         return [
-            'default_locale' => $this->envDetails['APP_LOCALE'] ?? $this->getEnvVariable('APP_LOCALE', 'en'),
-            'allowed_locales' => $this->envDetails['APP_ALLOWED_LOCALES'] ?? [$this->getEnvVariable('APP_LOCALE', 'en')],
-            'default_currency' => $this->envDetails['APP_CURRENCY'] ?? $this->getEnvVariable('APP_CURRENCY', 'USD'),
+            'default_locale'     => $this->envDetails['APP_LOCALE'] ?? $this->getEnvVariable('APP_LOCALE', 'en'),
+            'allowed_locales'    => $this->envDetails['APP_ALLOWED_LOCALES'] ?? [$this->getEnvVariable('APP_LOCALE', 'en')],
+            'default_currency'   => $this->envDetails['APP_CURRENCY'] ?? $this->getEnvVariable('APP_CURRENCY', 'USD'),
             'allowed_currencies' => $this->envDetails['APP_ALLOWED_CURRENCIES'] ?? [$this->getEnvVariable('APP_CURRENCY', 'USD')],
         ];
     }
